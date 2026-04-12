@@ -1,5 +1,5 @@
 [project]
-name = "syncthing-mcp"
+name = "syncthing-blade-mcp"
 version = "0.3.0"
 description = "MCP server for Syncthing — token-efficient replication management, multi-instance, safe disk-space reclamation."
 requires-python = ">=3.11"
@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-syncthing-mcp = "syncthing_mcp.__main__:main"
+syncthing-blade-mcp = "syncthing_mcp.__main__:main"
 
 [dependency-groups]
 dev = [

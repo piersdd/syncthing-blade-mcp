@@ -1,4 +1,4 @@
-"""Entry point for `python -m syncthing_mcp` and the `syncthing-mcp` console script."""
+"""Entry point for `python -m syncthing_mcp` and the `syncthing-blade-mcp` console script."""
 
 import os
 import sys

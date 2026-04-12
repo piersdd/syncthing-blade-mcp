@@ -13,9 +13,9 @@
 # The /health endpoint is unauthenticated for Cloudflare health probes.
 
 services:
-  syncthing-mcp:
+  syncthing-blade-mcp:
     build: .
-    container_name: syncthing-mcp
+    container_name: syncthing-blade-mcp
     restart: unless-stopped
     env_file: .env
     environment:
@@ -29,7 +29,7 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    container_name: syncthing-mcp-tunnel
+    container_name: syncthing-blade-mcp-tunnel
     restart: unless-stopped
     command: tunnel run
     environment:
@@ -37,7 +37,7 @@ services:
     networks:
       - tunnel
     depends_on:
-      - syncthing-mcp
+      - syncthing-blade-mcp
 
 networks:
   tunnel:

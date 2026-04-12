@@ -1,4 +1,4 @@
-# syncthing-mcp
+# syncthing-blade-mcp
 
 An MCP (Model Context Protocol) server for [Syncthing](https://syncthing.net/) — the open-source continuous file synchronisation tool.
 
@@ -116,7 +116,7 @@ See [SKILL.md](SKILL.md) for the complete LLM skill guide.
 ## Project Structure
 
 ```
-syncthing-mcp/
+syncthing-blade-mcp/
 ├── src/syncthing_mcp/
 │   ├── __init__.py          # Package version
 │   ├── __main__.py          # Entry point (stdio + HTTP transport)
@@ -162,7 +162,7 @@ Every tool accepts an optional `instance` parameter to target a specific node. W
     "syncthing": {
       "command": "uv",
       "args": [
-        "--directory", "/path/to/syncthing-mcp",
+        "--directory", "/path/to/syncthing-blade-mcp",
         "run", "python", "-m", "syncthing_mcp"
       ],
       "env": {
@@ -196,8 +196,8 @@ The `safe` flag requires: at least one remote device at 100% completion with `re
 ### Install
 
 ```bash
-git clone https://github.com/piersdd/syncthing-mcp.git
-cd syncthing-mcp
+git clone https://github.com/piersdd/syncthing-blade-mcp.git
+cd syncthing-blade-mcp
 uv sync
 ```
 
@@ -213,7 +213,7 @@ Open the Syncthing web UI → Actions → Settings → API Key.
     "syncthing": {
       "command": "uv",
       "args": [
-        "--directory", "/path/to/syncthing-mcp",
+        "--directory", "/path/to/syncthing-blade-mcp",
         "run", "python", "-m", "syncthing_mcp"
       ],
       "env": {
@@ -230,7 +230,7 @@ Open the Syncthing web UI → Actions → Settings → API Key.
 ### Streamable HTTP (direct)
 
 ```bash
-MCP_TRANSPORT=streamable-http MCP_AUTH_TOKEN=secret MCP_PORT=8000 syncthing-mcp
+MCP_TRANSPORT=streamable-http MCP_AUTH_TOKEN=secret MCP_PORT=8000 syncthing-blade-mcp
 ```
 
 ### Docker + Traefik (HTTPS with ACME/Let's Encrypt)
@@ -241,7 +241,7 @@ docker compose up -d
 ```
 
 This deploys behind Traefik with automatic Let's Encrypt TLS certificates.
-The MCP endpoint is available at `https://syncthing-mcp.<DOMAIN>/mcp`.
+The MCP endpoint is available at `https://syncthing-blade-mcp.<DOMAIN>/mcp`.
 
 ### Docker + Cloudflare Tunnel (zero-trust, no open ports)
 
@@ -251,7 +251,7 @@ docker compose -f docker-compose.tunnel.yml up -d
 ```
 
 Create a tunnel at [Cloudflare Zero Trust](https://one.dash.cloudflare.com) → Networks → Tunnels.
-Point the tunnel's public hostname to `http://syncthing-mcp:8000`.
+Point the tunnel's public hostname to `http://syncthing-blade-mcp:8000`.
 Bearer token auth (`MCP_AUTH_TOKEN`) secures the endpoint; `/health` is unauthenticated for probes.
 
 ### Claude Code (remote HTTP)
@@ -261,7 +261,7 @@ Bearer token auth (`MCP_AUTH_TOKEN`) secures the endpoint; `/health` is unauthen
   "mcpServers": {
     "syncthing": {
       "type": "streamable-http",
-      "url": "https://syncthing-mcp.example.com/mcp",
+      "url": "https://syncthing-blade-mcp.example.com/mcp",
       "headers": {
         "Authorization": "Bearer YOUR_MCP_AUTH_TOKEN"
       }

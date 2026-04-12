@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SERVER_NAME="syncthing-mcp"
+SERVER_NAME="syncthing-blade-mcp"
 DEST="$HOME/.local/share/mcp-servers/$SERVER_NAME"
 
 # Clean deploy — wipe previous, copy fresh
