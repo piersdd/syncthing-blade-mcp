@@ -1,0 +1,92 @@
+name: syncthing-blade-mcp
+version: "0.3.1"
+description: "Syncthing replication management MCP — multi-instance, token-efficient output, safe disk-space reclamation"
+author: groupthink-dev
+licence: MIT
+tier: certified
+author_type: first-party
+readiness: beta
+contract: sync-v1
+
+services:
+  instances:
+    list: syncthing_list_instances
+  system:
+    status: syncthing_system_status
+    health: syncthing_health_summary
+    errors: syncthing_system_errors
+    clear_errors: syncthing_clear_errors
+    log: syncthing_system_log
+    recent_changes: syncthing_recent_changes
+    restart_required: syncthing_restart_required
+    restart: syncthing_restart
+    check_upgrade: syncthing_check_upgrade
+  folders:
+    list: syncthing_list_folders
+    status: syncthing_folder_status
+    completion: syncthing_folder_completion
+    replication_report: syncthing_replication_report
+    errors: syncthing_folder_errors
+    scan: syncthing_scan_folder
+    pause: syncthing_pause_folder
+    resume: syncthing_resume_folder
+    override: syncthing_override_folder
+    revert: syncthing_revert_folder
+  files:
+    browse: syncthing_browse_folder
+    info: syncthing_file_info
+    need: syncthing_folder_need
+    remote_need: syncthing_remote_need
+  devices:
+    list: syncthing_list_devices
+    completion: syncthing_device_completion
+    connections: syncthing_connections
+    stats: syncthing_device_stats
+  config:
+    pending_devices: syncthing_pending_devices
+    pending_folders: syncthing_pending_folders
+    accept_device: syncthing_accept_device
+    reject_device: syncthing_reject_device
+    accept_folder: syncthing_accept_folder
+    reject_folder: syncthing_reject_folder
+    get_ignores: syncthing_get_ignores
+    set_ignores: syncthing_set_ignores
+    get_default_ignores: syncthing_get_default_ignores
+    set_default_ignores: syncthing_set_default_ignores
+
+setup:
+  icon: "🔄"
+  blurb: "Syncthing file sync — multi-instance replication status, safe disk-space reclamation, device management"
+  auth_model: api_key
+  complexity: simple
+
+install:
+  runtime: uv
+  package: syncthing-blade-mcp
+  command: syncthing-blade-mcp
+
+env:
+  - name: SYNCTHING_API_KEY
+    secret: true
+    required: true
+    description: "Syncthing REST API key (single-instance mode)"
+  - name: SYNCTHING_URL
+    secret: false
+    required: false
+    description: "Syncthing base URL (default: http://localhost:8384)"
+  - name: SYNCTHING_INSTANCES
+    secret: true
+    required: false
+    description: "JSON object for multi-instance mode (overrides API_KEY/URL)"
+  - name: MCP_TRANSPORT
+    secret: false
+    required: false
+    description: "Transport: stdio (default) or streamable-http"
+  - name: MCP_AUTH_TOKEN
+    secret: true
+    required: false
+    description: "Bearer token for HTTP transport auth"
+
+conformance:
+  required: "38"
+  last_tested: "2026-04-21"
