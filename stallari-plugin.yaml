@@ -59,6 +59,23 @@ setup:
   blurb: "Syncthing file sync — multi-instance replication status, safe disk-space reclamation, device management"
   auth_model: api_key
   complexity: simple
+  fields:
+    - key: SYNCTHING_API_KEY
+      label: "API Key"
+      secret: true
+      required: true
+      help: "Syncthing REST API key — find in Actions → Settings → API Key"
+    - key: SYNCTHING_URL
+      label: "Server URL"
+      required: false
+      placeholder: "http://localhost:8384"
+      help: "Syncthing web GUI URL. Defaults to localhost:8384"
+    - key: SYNCTHING_INSTANCES
+      label: "Multi-Instance Config"
+      secret: true
+      required: false
+      placeholder: '{"name": {"url": "...", "apiKey": "..."}}'
+      help: "JSON object for multi-instance mode. Overrides API Key and URL above"
 
 install:
   runtime: uv
@@ -78,14 +95,6 @@ env:
     secret: true
     required: false
     description: "JSON object for multi-instance mode (overrides API_KEY/URL)"
-  - name: MCP_TRANSPORT
-    secret: false
-    required: false
-    description: "Transport: stdio (default) or streamable-http"
-  - name: MCP_AUTH_TOKEN
-    secret: true
-    required: false
-    description: "Bearer token for HTTP transport auth"
 
 conformance:
   required: "38"
